@@ -7,6 +7,7 @@ defmodule BusiApiWeb.Router do
 
   scope "/api", BusiApiWeb do
     pipe_through :api
+    resources "/businesses", BusinessController, except: [:new, :edit]
   end
 
   pipeline :browser do
