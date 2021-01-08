@@ -27,4 +27,10 @@ defmodule BusiApiWeb.FallbackController do
     |> put_status(:unauthorized)
     |> render(BusiApiWeb.ErrorView, :"401")
   end
+
+  def call(conn, {:error, :token_expired}) do
+    conn
+    |> put_status(:unauthorized)
+    |> render(BusiApiWeb.ErrorView, :"401")
+  end
 end

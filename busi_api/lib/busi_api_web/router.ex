@@ -13,6 +13,7 @@ defmodule BusiApiWeb.Router do
     pipe_through :api
     post "/users/signup", UserController, :create
     post "/users/signin", UserController, :signin
+    post "/users/renew", UserController, :renew
   end
 
   scope "/api", BusiApiWeb do
