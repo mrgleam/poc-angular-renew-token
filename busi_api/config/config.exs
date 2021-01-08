@@ -29,3 +29,8 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+config :busi_api, BusiApiWeb.Auth.Guardian,
+  ttl: {1, :minute},
+  issuer: "busi_api",
+  secret_key: "RDwZ9tINKUdQ+EeKDoG6PVLNZjU0l6mZGaKYOUo7kwCqLF8AjAMbEJcuzzQagPZX"
