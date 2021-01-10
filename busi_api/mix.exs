@@ -46,7 +46,8 @@ defmodule BusiApi.MixProject do
       {:guardian, "~> 2.0"},
       {:comeonin, "~> 4.0"},
       {:bcrypt_elixir, "~> 1.0"},
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 

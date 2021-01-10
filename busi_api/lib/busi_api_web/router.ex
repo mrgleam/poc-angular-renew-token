@@ -6,19 +6,24 @@ defmodule BusiApiWeb.Router do
   end
 
   pipeline :api do
+    plug CORSPlug, origin: "*"
     plug :accepts, ["json"]
   end
 
   scope "/api", BusiApiWeb do
     pipe_through :api
     post "/users/signup", UserController, :create
+
+    options "/users/signin", UserController, :options
     post "/users/signin", UserController, :signin
+    options "/users/renew", UserController, :options
     post "/users/renew", UserController, :renew
   end
 
   scope "/api", BusiApiWeb do
     pipe_through [:api, :auth]
     resources "/businesses", BusinessController, except: [:new, :edit]
+    options   "/businesses", BusinessController, :options
   end
 
   pipeline :browser do
