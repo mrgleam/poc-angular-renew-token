@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
+import { BusinessService } from '../_services/business.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private businessService: BusinessService) { }
 
   ngOnInit(): void {
+    forkJoin([this.businessService.list(), this.businessService.list()]).subscribe(res => {
+      console.log(res)
+    })
   }
 
 }

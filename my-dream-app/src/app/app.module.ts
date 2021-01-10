@@ -12,6 +12,9 @@ import { RegisterComponent } from './register/register.component';
 import { AlertComponent } from './_directives';
 import { AuthGuard } from './_guards';
 import { AlertService, AuthenticationService } from './_services';
+import { JwtInterceptor } from './_helpers';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { BusinessService } from './_services/business.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { AlertService, AuthenticationService } from './_services';
   providers: [
     AuthGuard,
     AlertService,
-    AuthenticationService
+    AuthenticationService,
+    BusinessService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
