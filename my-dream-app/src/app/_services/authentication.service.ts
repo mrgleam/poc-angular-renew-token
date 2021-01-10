@@ -13,8 +13,8 @@ export class AuthenticationService {
                 // login successful if there's a jwt token in the response
                 if (user && user.token && user.refresh_token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('token', JSON.stringify(user.token));
-                    localStorage.setItem('refresh_token', JSON.stringify(user.refresh_token));
+                    localStorage.setItem('token', user.token);
+                    localStorage.setItem('refresh_token', user.refresh_token);
                 }
 
                 return user;
@@ -25,5 +25,19 @@ export class AuthenticationService {
         // remove user from local storage to log user out
         localStorage.removeItem('token');
         localStorage.removeItem('refresh_token');
+    }
+
+    renew() {
+      const token = localStorage.getItem('refresh_token') || '';
+      return this.http.post<any>(`${environment.apiUrl}/users/renew`, { token })
+            .pipe(map(res => {
+                // login successful if there's a jwt token in the response
+                if (res && res.token) {
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('token', res.token);
+                }
+
+                return res;
+            }));
     }
 }

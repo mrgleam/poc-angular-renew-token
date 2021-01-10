@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private businessService: BusinessService) { }
 
   ngOnInit(): void {
-    forkJoin([this.businessService.list(), this.businessService.list()]).subscribe(res => {
+    forkJoin([this.businessService.list(), this.businessService.list(), this.businessService.list()]).subscribe(res => {
       console.log(res)
     })
   }
